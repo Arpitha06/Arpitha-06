@@ -1,10 +1,83 @@
 import { Component } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'formly-app-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Stepper-Multi-Form2';
+  form = new FormGroup({});
+  model: any = {};
+  options: FormlyFormOptions = {};
+
+  fields: FormlyFieldConfig[] = [{
+    type: 'stepper',
+
+    fieldGroup: [
+      {
+        templateOptions: { label: 'Personal data' },
+        fieldGroup: [
+          {
+            key: 'firstname',
+            type: 'input',
+            templateOptions: {
+              label: 'First name',
+              required: true,
+            },
+          },
+          
+          {
+            key: 'age',
+            type: 'input',
+            templateOptions: {
+              type: 'number',
+              label: 'Age',
+              required: true,
+            },
+          },
+        ],
+      },
+
+      {
+        templateOptions: { label: 'Destination' },
+        fieldGroup: [
+          {
+            key: 'country',
+            type: 'input',
+            templateOptions: {
+              label: 'Country',
+              required: true,
+            },
+          },
+        ],
+      },
+
+
+      {
+        templateOptions: { label: 'Day of the trip' },
+        fieldGroup: [
+          {
+            key: 'day',
+            type: 'input',
+            templateOptions: {
+              type: 'date',
+              label: 'Day of the trip',
+              required: true,
+            },
+          },
+        ],
+      },
+      
+    ],
+  }];
+
+  submit() {
+    alert(JSON.stringify(this.model));
+  }
 }
+
+
+/**  Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license */
